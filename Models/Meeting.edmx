@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MoshanirMeetingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MeetingFiles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="MeetingFile" Type="varbinary(max)" />
+          <Property Name="MeetingId" Type="int" />
+          <Property Name="Creator" Type="int" />
+        </EntityType>
+        <EntityType Name="Meetings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="MeetingNumber" Type="int" />
+          <Property Name="InnerParticipator" Type="nvarchar(max)" />
+          <Property Name="OuterParticipator" Type="nvarchar(max)" />
+          <Property Name="Location" Type="nvarchar(max)" />
+          <Property Name="Creator" Type="int" />
+          <Property Name="MeetingDate" Type="date" />
+        </EntityType>
+        <EntityType Name="MeetingSubjects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubTitle" Type="nvarchar(max)" />
+          <Property Name="Responsible" Type="nvarchar(max)" />
+          <Property Name="DeadLine" Type="date" />
+          <Property Name="MeetingId" Type="int" />
+          <Property Name="Creator" Type="int" />
+        </EntityType>
+        <Association Name="FK_MeetingFiles_Meetings">
+          <End Role="Meetings" Type="Self.Meetings" Multiplicity="0..1" />
+          <End Role="MeetingFiles" Type="Self.MeetingFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meetings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MeetingFiles">
+              <PropertyRef Name="MeetingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MeetingSubjects_Meetings">
+          <End Role="Meetings" Type="Self.Meetings" Multiplicity="0..1" />
+          <End Role="MeetingSubjects" Type="Self.MeetingSubjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meetings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MeetingSubjects">
+              <PropertyRef Name="MeetingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MoshanirMeetingModelStoreContainer">
+          <EntitySet Name="MeetingFiles" EntityType="Self.MeetingFiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meetings" EntityType="Self.Meetings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MeetingSubjects" EntityType="Self.MeetingSubjects" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_MeetingFiles_Meetings" Association="Self.FK_MeetingFiles_Meetings">
+            <End Role="Meetings" EntitySet="Meetings" />
+            <End Role="MeetingFiles" EntitySet="MeetingFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MeetingSubjects_Meetings" Association="Self.FK_MeetingSubjects_Meetings">
+            <End Role="Meetings" EntitySet="Meetings" />
+            <End Role="MeetingSubjects" EntitySet="MeetingSubjects" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MoshanirMeetingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="MeetingFiles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="MeetingFile" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="MeetingId" Type="Int32" />
+          <Property Name="Creator" Type="Int32" />
+          <NavigationProperty Name="Meetings" Relationship="Self.FK_MeetingFiles_Meetings" FromRole="MeetingFiles" ToRole="Meetings" />
+        </EntityType>
+        <EntityType Name="Meetings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MeetingNumber" Type="Int32" />
+          <Property Name="InnerParticipator" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OuterParticipator" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Creator" Type="Int32" />
+          <NavigationProperty Name="MeetingFiles" Relationship="Self.FK_MeetingFiles_Meetings" FromRole="Meetings" ToRole="MeetingFiles" />
+          <NavigationProperty Name="MeetingSubjects" Relationship="Self.FK_MeetingSubjects_Meetings" FromRole="Meetings" ToRole="MeetingSubjects" />
+          <Property Name="MeetingDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="MeetingSubjects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="SubTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Responsible" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DeadLine" Type="DateTime" Precision="0" />
+          <Property Name="MeetingId" Type="Int32" />
+          <Property Name="Creator" Type="Int32" />
+          <NavigationProperty Name="Meetings" Relationship="Self.FK_MeetingSubjects_Meetings" FromRole="MeetingSubjects" ToRole="Meetings" />
+        </EntityType>
+        <Association Name="FK_MeetingFiles_Meetings">
+          <End Role="Meetings" Type="Self.Meetings" Multiplicity="0..1" />
+          <End Role="MeetingFiles" Type="Self.MeetingFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meetings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MeetingFiles">
+              <PropertyRef Name="MeetingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MeetingSubjects_Meetings">
+          <End Role="Meetings" Type="Self.Meetings" Multiplicity="0..1" />
+          <End Role="MeetingSubjects" Type="Self.MeetingSubjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meetings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MeetingSubjects">
+              <PropertyRef Name="MeetingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MoshanirMeetingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MeetingFiles" EntityType="Self.MeetingFiles" />
+          <EntitySet Name="Meetings" EntityType="Self.Meetings" />
+          <EntitySet Name="MeetingSubjects" EntityType="Self.MeetingSubjects" />
+          <AssociationSet Name="FK_MeetingFiles_Meetings" Association="Self.FK_MeetingFiles_Meetings">
+            <End Role="Meetings" EntitySet="Meetings" />
+            <End Role="MeetingFiles" EntitySet="MeetingFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MeetingSubjects_Meetings" Association="Self.FK_MeetingSubjects_Meetings">
+            <End Role="Meetings" EntitySet="Meetings" />
+            <End Role="MeetingSubjects" EntitySet="MeetingSubjects" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MoshanirMeetingModelStoreContainer" CdmEntityContainer="MoshanirMeetingEntities">
+          <EntitySetMapping Name="MeetingFiles">
+            <EntityTypeMapping TypeName="MoshanirMeetingModel.MeetingFiles">
+              <MappingFragment StoreEntitySet="MeetingFiles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MeetingFile" ColumnName="MeetingFile" />
+                <ScalarProperty Name="MeetingId" ColumnName="MeetingId" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meetings">
+            <EntityTypeMapping TypeName="MoshanirMeetingModel.Meetings">
+              <MappingFragment StoreEntitySet="Meetings">
+                <ScalarProperty Name="MeetingDate" ColumnName="MeetingDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="MeetingNumber" ColumnName="MeetingNumber" />
+                <ScalarProperty Name="InnerParticipator" ColumnName="InnerParticipator" />
+                <ScalarProperty Name="OuterParticipator" ColumnName="OuterParticipator" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MeetingSubjects">
+            <EntityTypeMapping TypeName="MoshanirMeetingModel.MeetingSubjects">
+              <MappingFragment StoreEntitySet="MeetingSubjects">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SubTitle" ColumnName="SubTitle" />
+                <ScalarProperty Name="Responsible" ColumnName="Responsible" />
+                <ScalarProperty Name="DeadLine" ColumnName="DeadLine" />
+                <ScalarProperty Name="MeetingId" ColumnName="MeetingId" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

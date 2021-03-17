@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IntranetDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Contact">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Building" Type="nvarchar" MaxLength="100" />
+    <Property Name="Deputy" Type="nvarchar" MaxLength="255" />
+    <Property Name="OfficePosition" Type="nvarchar" MaxLength="255" />
+    <Property Name="Title" Type="nvarchar" MaxLength="255" />
+    <Property Name="DirectPhoneNo" Type="nvarchar" MaxLength="100" />
+    <Property Name="CallingCenter" Type="nvarchar" MaxLength="100" />
+    <Property Name="Tel" Type="nvarchar" MaxLength="100" />
+    <Property Name="EmailAddress" Type="varchar" MaxLength="200" />
+    <Property Name="Enabled" Type="bit" Nullable="false" />
+    <Property Name="Pic" Type="varchar" MaxLength="200" />
+    <Property Name="prsnum" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="contactnew">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Building" Type="nvarchar" MaxLength="100" />
+    <Property Name="Deputy" Type="nvarchar" MaxLength="255" />
+    <Property Name="OfficePosition" Type="nvarchar" MaxLength="255" />
+    <Property Name="Title" Type="nvarchar" MaxLength="255" />
+    <Property Name="DirectPhoneNo" Type="nvarchar" MaxLength="100" />
+    <Property Name="CallingCenter" Type="nvarchar" MaxLength="100" />
+    <Property Name="Tel" Type="nvarchar" MaxLength="100" />
+    <Property Name="EmailAddress" Type="varchar" MaxLength="200" />
+    <Property Name="Enabled" Type="bit" Nullable="false" />
+    <Property Name="Pic" Type="varchar" MaxLength="200" />
+    <Property Name="prsnum" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="TelAdmin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Prsnum" Type="int" />
+    <Property Name="Enabled" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IntranetDatabase.dbo.View_ContactList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_ContactList">
+    <Key>
+      <PropertyRef Name="NumBuild" />
+      <PropertyRef Name="Prsnum" />
+    </Key>
+    <Property Name="Prsnum" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Nam" Type="nvarchar" MaxLength="50" />
+    <Property Name="NamKhanevadegi" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sharh_Onvan" Type="nvarchar" MaxLength="700" />
+    <Property Name="Proj_Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Moavenat" Type="varchar" MaxLength="50" />
+    <Property Name="NamLatin" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="NamKhanevadegiLatin" Type="nvarchar" MaxLength="50" />
+    <Property Name="NumBuild" Type="varchar" MaxLength="13" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="IntranetDatabaseModelStoreContainer">
+    <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="contactnew" EntityType="Self.contactnew" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TelAdmin" EntityType="Self.TelAdmin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="View_ContactList" EntityType="Self.View_ContactList" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_ContactList].[Prsnum] AS [Prsnum], 
+    [View_ContactList].[Nam] AS [Nam], 
+    [View_ContactList].[NamKhanevadegi] AS [NamKhanevadegi], 
+    [View_ContactList].[Sharh_Onvan] AS [Sharh_Onvan], 
+    [View_ContactList].[Proj_Name] AS [Proj_Name], 
+    [View_ContactList].[Moavenat] AS [Moavenat], 
+    [View_ContactList].[NamLatin] AS [NamLatin], 
+    [View_ContactList].[Email] AS [Email], 
+    [View_ContactList].[NamKhanevadegiLatin] AS [NamKhanevadegiLatin], 
+    [View_ContactList].[NumBuild] AS [NumBuild]
+    FROM [dbo].[View_ContactList] AS [View_ContactList]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

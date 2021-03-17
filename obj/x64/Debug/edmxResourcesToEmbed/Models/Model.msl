@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="IntranetDatabaseModelStoreContainer" CdmEntityContainer="IntranetDatabaseString">
+    <EntitySetMapping Name="View_ContactList">
+      <EntityTypeMapping TypeName="IntranetDatabaseModel.View_ContactList">
+        <MappingFragment StoreEntitySet="View_ContactList">
+          <ScalarProperty Name="Prsnum" ColumnName="Prsnum" />
+          <ScalarProperty Name="Nam" ColumnName="Nam" />
+          <ScalarProperty Name="NamKhanevadegi" ColumnName="NamKhanevadegi" />
+          <ScalarProperty Name="Sharh_Onvan" ColumnName="Sharh_Onvan" />
+          <ScalarProperty Name="Proj_Name" ColumnName="Proj_Name" />
+          <ScalarProperty Name="Moavenat" ColumnName="Moavenat" />
+          <ScalarProperty Name="NamLatin" ColumnName="NamLatin" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="NamKhanevadegiLatin" ColumnName="NamKhanevadegiLatin" />
+          <ScalarProperty Name="NumBuild" ColumnName="NumBuild" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="contactnew">
+      <EntityTypeMapping TypeName="IntranetDatabaseModel.contactnew">
+        <MappingFragment StoreEntitySet="contactnew">
+          <ScalarProperty Name="prsnum" ColumnName="prsnum" />
+          <ScalarProperty Name="Pic" ColumnName="Pic" />
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="CallingCenter" ColumnName="CallingCenter" />
+          <ScalarProperty Name="DirectPhoneNo" ColumnName="DirectPhoneNo" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="OfficePosition" ColumnName="OfficePosition" />
+          <ScalarProperty Name="Deputy" ColumnName="Deputy" />
+          <ScalarProperty Name="Building" ColumnName="Building" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contact">
+      <EntityTypeMapping TypeName="IntranetDatabaseModel.Contact">
+        <MappingFragment StoreEntitySet="Contact">
+          <ScalarProperty Name="prsnum" ColumnName="prsnum" />
+          <ScalarProperty Name="Pic" ColumnName="Pic" />
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="CallingCenter" ColumnName="CallingCenter" />
+          <ScalarProperty Name="DirectPhoneNo" ColumnName="DirectPhoneNo" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="OfficePosition" ColumnName="OfficePosition" />
+          <ScalarProperty Name="Deputy" ColumnName="Deputy" />
+          <ScalarProperty Name="Building" ColumnName="Building" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TelAdmin">
+      <EntityTypeMapping TypeName="IntranetDatabaseModel.TelAdmin">
+        <MappingFragment StoreEntitySet="TelAdmin">
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="Prsnum" ColumnName="Prsnum" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
