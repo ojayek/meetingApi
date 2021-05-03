@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MoshanirMeetingModelStoreContainer" CdmEntityContainer="MoshanirMeetingEntities">
+    <EntitySetMapping Name="MeetingFiles">
+      <EntityTypeMapping TypeName="MoshanirMeetingModel.MeetingFiles">
+        <MappingFragment StoreEntitySet="MeetingFiles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MeetingFile" ColumnName="MeetingFile" />
+          <ScalarProperty Name="MeetingId" ColumnName="MeetingId" />
+          <ScalarProperty Name="Creator" ColumnName="Creator" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Meetings">
+      <EntityTypeMapping TypeName="MoshanirMeetingModel.Meetings">
+        <MappingFragment StoreEntitySet="Meetings">
+          <ScalarProperty Name="MeetingDate" ColumnName="MeetingDate" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="MeetingNumber" ColumnName="MeetingNumber" />
+          <ScalarProperty Name="InnerParticipator" ColumnName="InnerParticipator" />
+          <ScalarProperty Name="OuterParticipator" ColumnName="OuterParticipator" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Creator" ColumnName="Creator" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MeetingSubjects">
+      <EntityTypeMapping TypeName="MoshanirMeetingModel.MeetingSubjects">
+        <MappingFragment StoreEntitySet="MeetingSubjects">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SubTitle" ColumnName="SubTitle" />
+          <ScalarProperty Name="Responsible" ColumnName="Responsible" />
+          <ScalarProperty Name="DeadLine" ColumnName="DeadLine" />
+          <ScalarProperty Name="MeetingId" ColumnName="MeetingId" />
+          <ScalarProperty Name="Creator" ColumnName="Creator" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

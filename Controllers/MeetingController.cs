@@ -21,12 +21,22 @@ namespace CreateXmlWebApi.Controllers
         public IEnumerable<Meetings> GetAllMeeting()
         {
             var data = db.Meetings.ToList();
+          
             var lstContacts = new List<Meetings>();
 
             foreach (var item in data)
             {
-                var prsdata = new Meetings();
-                //prsdata.Prsnum = int.Parse(item.Prsnum.ToString());
+                var meetData = new Meetings();
+                meetData.Id = int.Parse(item.Id.ToString());
+                meetData.Location = item.Location.ToString();
+                meetData.Title = item.Title.ToString();
+                meetData.InnerParticipator = item.InnerParticipator.ToString();
+                meetData.MeetingDate = item.MeetingDate.HasValue?item.MeetingDate.Value:null;
+                meetData.MeetingNumber = item.MeetingNumber;
+                meetData.OuterParticipator = item.OuterParticipator;
+                meetData.Creator = item.Creator;
+              
+
                 //prsdata.Nam = (item.Nam != null) ? item.Nam.Replace('ي', 'ی').Replace('ك','ک'):null;
                 //prsdata.NamKhanevadegi = (item.NamKhanevadegi != null) ? item.NamKhanevadegi.Replace('ي', 'ی').Replace('ك', 'ک'):null;
                 //prsdata.NamKhanevadegiLatin = item.NamKhanevadegiLatin;
@@ -40,7 +50,7 @@ namespace CreateXmlWebApi.Controllers
                 //{
                 //    lstContacts.Add(prsdata);
                 //}
-                lstContacts.Add(prsdata);
+                lstContacts.Add(meetData);
             }
             var teldatas = db.Meetings.Where(o => (!string.IsNullOrEmpty(o.Title) || !string.IsNullOrEmpty(o.Title)));
             //foreach (var item in teldatas)
@@ -73,10 +83,25 @@ namespace CreateXmlWebApi.Controllers
                
                 prsdata.Location = (item.Location != null) ? item.Location.Replace('ي', 'ی').Replace('ك', 'ک'):null;
                 prsdata.MeetingDate = item.MeetingDate;
+
+
+
                 if (!lstContacts.Where(o => o.Id == prsdata.Id).Any())
                 {
+                    var meetingSubjects = db.MeetingSubjects.Where(o => o.MeetingId == item.Id).ToList();
+                    foreach (var meetSubject in meetingSubjects)
+                    {
+                        var ms = new MeetingSubjects();
+                        ms.SubTitle = meetSubject.SubTitle;
+                        ms.Responsible = meetSubject.Responsible;
+                        ms.MeetingId = meetSubject.MeetingId;
+                        ms.DeadLine = meetSubject.DeadLine.HasValue ? meetSubject.DeadLine.Value : null;
+                        prsdata.MeetingSubjects.Add(ms);
+                    }
                     lstContacts.Add(prsdata);
                 }
+
+
             }
             
             

@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MoshanirMeetingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="MeetingFiles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="MeetingFile" Type="varbinary(max)" />
+    <Property Name="MeetingId" Type="int" />
+    <Property Name="Creator" Type="int" />
+  </EntityType>
+  <EntityType Name="Meetings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="MeetingNumber" Type="int" />
+    <Property Name="InnerParticipator" Type="nvarchar(max)" />
+    <Property Name="OuterParticipator" Type="nvarchar(max)" />
+    <Property Name="Location" Type="nvarchar(max)" />
+    <Property Name="Creator" Type="int" />
+    <Property Name="MeetingDate" Type="date" />
+  </EntityType>
+  <EntityType Name="MeetingSubjects">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubTitle" Type="nvarchar(max)" />
+    <Property Name="Responsible" Type="nvarchar(max)" />
+    <Property Name="DeadLine" Type="date" />
+    <Property Name="MeetingId" Type="int" />
+    <Property Name="Creator" Type="int" />
+  </EntityType>
+  <Association Name="FK_MeetingFiles_Meetings">
+    <End Role="Meetings" Type="Self.Meetings" Multiplicity="0..1" />
+    <End Role="MeetingFiles" Type="Self.MeetingFiles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Meetings">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MeetingFiles">
+        <PropertyRef Name="MeetingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MeetingSubjects_Meetings">
+    <End Role="Meetings" Type="Self.Meetings" Multiplicity="0..1" />
+    <End Role="MeetingSubjects" Type="Self.MeetingSubjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Meetings">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MeetingSubjects">
+        <PropertyRef Name="MeetingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MoshanirMeetingModelStoreContainer">
+    <EntitySet Name="MeetingFiles" EntityType="Self.MeetingFiles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Meetings" EntityType="Self.Meetings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MeetingSubjects" EntityType="Self.MeetingSubjects" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_MeetingFiles_Meetings" Association="Self.FK_MeetingFiles_Meetings">
+      <End Role="Meetings" EntitySet="Meetings" />
+      <End Role="MeetingFiles" EntitySet="MeetingFiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MeetingSubjects_Meetings" Association="Self.FK_MeetingSubjects_Meetings">
+      <End Role="Meetings" EntitySet="Meetings" />
+      <End Role="MeetingSubjects" EntitySet="MeetingSubjects" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

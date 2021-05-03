@@ -7,7 +7,7 @@
       <Diagram DiagramId="2d8188f5ec384a338277cf235c9c1eb1" Name="Diagram1">
         <EntityTypeShape EntityType="MoshanirMeetingModel.MeetingFiles" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MoshanirMeetingModel.Meetings" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MoshanirMeetingModel.MeetingSubjects" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MoshanirMeetingModel.MeetingSubjects" Width="3" PointX="4" PointY="4.125" IsExpanded="true" />
         <AssociationConnector Association="MoshanirMeetingModel.FK_MeetingFiles_Meetings" ManuallyRouted="false" />
         <AssociationConnector Association="MoshanirMeetingModel.FK_MeetingSubjects_Meetings" ManuallyRouted="false" />
       </Diagram>

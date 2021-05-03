@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MoshanirMeetingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="MeetingFiles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="MeetingFile" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="MeetingId" Type="Int32" />
+    <Property Name="Creator" Type="Int32" />
+    <NavigationProperty Name="Meetings" Relationship="Self.FK_MeetingFiles_Meetings" FromRole="MeetingFiles" ToRole="Meetings" />
+  </EntityType>
+  <EntityType Name="Meetings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MeetingNumber" Type="Int32" />
+    <Property Name="InnerParticipator" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OuterParticipator" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Creator" Type="Int32" />
+    <NavigationProperty Name="MeetingFiles" Relationship="Self.FK_MeetingFiles_Meetings" FromRole="Meetings" ToRole="MeetingFiles" />
+    <NavigationProperty Name="MeetingSubjects" Relationship="Self.FK_MeetingSubjects_Meetings" FromRole="Meetings" ToRole="MeetingSubjects" />
+    <Property Name="MeetingDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="MeetingSubjects">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="SubTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Responsible" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DeadLine" Type="DateTime" Precision="0" />
+    <Property Name="MeetingId" Type="Int32" />
+    <Property Name="Creator" Type="Int32" />
+    <NavigationProperty Name="Meetings" Relationship="Self.FK_MeetingSubjects_Meetings" FromRole="MeetingSubjects" ToRole="Meetings" />
+  </EntityType>
+  <Association Name="FK_MeetingFiles_Meetings">
+    <End Role="Meetings" Type="Self.Meetings" Multiplicity="0..1" />
+    <End Role="MeetingFiles" Type="Self.MeetingFiles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Meetings">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MeetingFiles">
+        <PropertyRef Name="MeetingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MeetingSubjects_Meetings">
+    <End Role="Meetings" Type="Self.Meetings" Multiplicity="0..1" />
+    <End Role="MeetingSubjects" Type="Self.MeetingSubjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Meetings">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MeetingSubjects">
+        <PropertyRef Name="MeetingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MoshanirMeetingEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="MeetingFiles" EntityType="Self.MeetingFiles" />
+    <EntitySet Name="Meetings" EntityType="Self.Meetings" />
+    <EntitySet Name="MeetingSubjects" EntityType="Self.MeetingSubjects" />
+    <AssociationSet Name="FK_MeetingFiles_Meetings" Association="Self.FK_MeetingFiles_Meetings">
+      <End Role="Meetings" EntitySet="Meetings" />
+      <End Role="MeetingFiles" EntitySet="MeetingFiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MeetingSubjects_Meetings" Association="Self.FK_MeetingSubjects_Meetings">
+      <End Role="Meetings" EntitySet="Meetings" />
+      <End Role="MeetingSubjects" EntitySet="MeetingSubjects" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
